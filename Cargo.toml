@@ -1,0 +1,7 @@
+[workspace]
+resolver = "3"
+members = [ "pointcloud","pointcloud_viewer"]
+
+[workspace.dependencies]
+rstar = "0.12.2"
+las = {version = "0.9.6", features = ["laz"]}
