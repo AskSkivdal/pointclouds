@@ -6,3 +6,4 @@ edition = "2024"
 [dependencies]
 rstar = {workspace = true}
 las = {workspace = true}
+derive_more = {workspace = true}
