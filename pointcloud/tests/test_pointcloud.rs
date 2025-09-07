@@ -68,16 +68,6 @@ mod query {
     }
 
     #[test]
-    fn get_not_in_bbox_miss() {
-        todo!()
-    }
-
-    #[test]
-    fn get_not_in_bbox_hit() {
-        todo!()
-    }
-
-    #[test]
     fn get_closest_miss() {
         todo!()
     }
