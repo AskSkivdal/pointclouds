@@ -17,9 +17,9 @@ use derive_more::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign
     DivAssign,
 )]
 pub struct Vector3 {
-    pub x: f32,
-    pub y: f32,
-    pub z: f32,
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
 }
 
 impl Vector3 {
@@ -41,7 +41,7 @@ impl Vector3 {
 }
 
 impl rstar::Point for Vector3 {
-    type Scalar = f32;
+    type Scalar = f64;
 
     const DIMENSIONS: usize = 3;
 

@@ -6,3 +6,4 @@ members = [ "pointcloud","pointcloud_viewer"]
 rstar = "0.12.2"
 las = {version = "0.9.6", features = ["laz"]}
 derive_more = { version = "2.0.1", features = ["full"] }
+rayon = "1.11.0"
