@@ -1,6 +1,7 @@
 pub mod types;
 use std::path::PathBuf;
 
+use rayon::iter::{IntoParallelRefIterator, IntoParallelRefMutIterator, ParallelIterator};
 use rstar::RTree;
 use types::*;
 
@@ -41,7 +42,7 @@ impl Pointcloud {
         let mut pcloud = las::Reader::from_path(path).unwrap();
         let header = pcloud.header().clone().into_raw().unwrap();
 
-        let points_vector: Vec<Point> = pcloud
+        let mut points_vector: Vec<Point> = pcloud
             .points()
             .flatten()
             .map(|x| Point {
@@ -50,8 +51,34 @@ impl Pointcloud {
                     y: x.y,
                     z: x.z,
                 },
+                intensity: x.intensity,
+                color: x
+                    .color
+                    .and_then(|color| Some(Color::new(color.red, color.green, color.blue))),
             })
             .collect();
+
+        // Some las files store colors as u8. If they use u8 then translate it to u16
+        let color_bounds = points_vector
+            .par_iter()
+            .filter_map(|x| x.color)
+            .map(|x| (x.r.max(x.g.max(x.b)), x.r.min(x.g.min(x.b))))
+            .reduce_with(|a, b| (a.0.max(b.0), a.1.min(b.1)));
+
+        if let Some((max, min)) = color_bounds {
+            if max == 0 && min == 0 {
+            } else if max <= u8::MAX as u16 {
+                points_vector.par_iter_mut().for_each(|x| {
+                    x.color = x.color.and_then(|color| {
+                        Some(Color {
+                            r: color.r.pow(2),
+                            g: color.g.pow(2),
+                            b: color.b.pow(2),
+                        })
+                    });
+                });
+            }
+        }
 
         Self {
             offset: Vector3 {

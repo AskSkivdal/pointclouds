@@ -33,7 +33,11 @@ mod point {
             z: 5.0,
         };
 
-        let empty_points: Vec<Point> = vec![Point { pos: p1.clone() }];
+        let empty_points: Vec<Point> = vec![Point {
+            pos: p1.clone(),
+            intensity: 0,
+            color: None,
+        }];
         let bounds: Bounds = (&empty_points).into();
 
         assert_eq!(
@@ -54,6 +58,8 @@ mod point {
                     y: -2.0,
                     z: 5.0,
                 },
+                intensity: 0,
+                color: None,
             },
             Point {
                 pos: Vector3 {
@@ -61,6 +67,8 @@ mod point {
                     y: 22.0,
                     z: 5.0,
                 },
+                intensity: 0,
+                color: None,
             },
             Point {
                 pos: Vector3 {
@@ -68,6 +76,8 @@ mod point {
                     y: 0.0,
                     z: 0.0,
                 },
+                intensity: 0,
+                color: None,
             },
             Point {
                 pos: Vector3 {
@@ -75,6 +85,8 @@ mod point {
                     y: -4.0,
                     z: 5.2,
                 },
+                intensity: 0,
+                color: None,
             },
         ];
         let bounds: Bounds = (&points).into();
