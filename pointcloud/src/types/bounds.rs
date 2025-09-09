@@ -13,6 +13,10 @@ impl Bounds {
         self.max = self.max.max(point);
         self.min = self.min.min(point);
     }
+
+    pub fn new(min: Vector3, max: Vector3) -> Self {
+        Bounds { min, max }
+    }
 }
 
 impl Into<Bounds> for &Vec<Point> {

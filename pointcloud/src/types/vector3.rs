@@ -38,6 +38,10 @@ impl Vector3 {
             z: self.z.max(b.z),
         }
     }
+
+    pub fn new(x: f64, y: f64, z: f64) -> Self {
+        Self { x, y, z }
+    }
 }
 
 impl rstar::Point for Vector3 {

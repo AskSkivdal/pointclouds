@@ -5,6 +5,8 @@ use rayon::iter::{IntoParallelRefIterator, IntoParallelRefMutIterator, ParallelI
 use rstar::RTree;
 use types::*;
 
+pub mod test_utils;
+
 #[derive(Debug, Clone)]
 pub enum Points {
     Vec(Vec<Point>),
@@ -104,6 +106,13 @@ impl Pointcloud {
                 },
             },
             points: Points::Vec(points_vector),
+        }
+    }
+
+    pub fn indexed(&self) -> bool {
+        match &self.points {
+            Points::Vec(_) => false,
+            Points::Indexed(_) => true,
         }
     }
 }

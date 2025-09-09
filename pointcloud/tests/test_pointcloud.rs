@@ -1,13 +1,19 @@
 #[cfg(test)]
 mod stats {
+    use pointcloud::test_utils::mock_pointcloud;
+
     #[test]
     fn is_indexed() {
-        todo!()
+        let mut pc = mock_pointcloud();
+        assert!(!pc.indexed());
+        pc.points = pc.points.initialize_index();
+        assert!(pc.indexed())
     }
 
     #[test]
     fn point_count() {
-        todo!()
+        let pc = mock_pointcloud();
+        assert_eq!(pc.points.count(), 4);
     }
 
     #[test]
