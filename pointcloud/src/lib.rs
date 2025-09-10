@@ -29,6 +29,21 @@ impl Points {
             Points::Indexed(rtree) => rtree.size(),
         }
     }
+
+    pub fn add_point(&mut self, point: Point) {
+        match self {
+            Points::Vec(points) => points.push(point),
+            Points::Indexed(rtree) => rtree.insert(point),
+        };
+    }
+
+    pub fn add_points(&mut self, points: Vec<Point>) {
+        let mut p2 = points;
+        match self {
+            Points::Vec(_points) => _points.append(&mut p2),
+            Points::Indexed(rtree) => p2.into_iter().for_each(|x| rtree.insert(x)),
+        };
+    }
 }
 
 #[derive(Debug, Clone)]
