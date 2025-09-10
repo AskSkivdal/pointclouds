@@ -23,6 +23,7 @@ pub struct Vector3 {
 }
 
 impl Vector3 {
+    /// Get the minimum value of all parts individualy
     pub fn min(&self, b: &Self) -> Self {
         Self {
             x: self.x.min(b.x),
@@ -31,6 +32,7 @@ impl Vector3 {
         }
     }
 
+    /// Get the maximum value of all parts individualy
     pub fn max(&self, b: &Self) -> Self {
         Self {
             x: self.x.max(b.x),

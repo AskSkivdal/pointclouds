@@ -14,6 +14,7 @@ pub enum Points {
 }
 
 impl Points {
+    /// Consume self and return a indexed version of the points.
     pub fn initialize_index(self) -> Self {
         if let Self::Vec(points) = self {
             Self::Indexed(RTree::bulk_load(points))
@@ -23,6 +24,7 @@ impl Points {
         }
     }
 
+    /// Get the amount of points in a pointcloud.
     pub fn count(&self) -> usize {
         match self {
             Points::Vec(points) => points.len(),
@@ -30,6 +32,7 @@ impl Points {
         }
     }
 
+    /// Add a point to the pointcloud.
     pub fn add_point(&mut self, point: Point) {
         match self {
             Points::Vec(points) => points.push(point),
@@ -37,6 +40,7 @@ impl Points {
         };
     }
 
+    /// Add multiple points to a pointcloud.
     pub fn add_points(&mut self, points: Vec<Point>) {
         let mut p2 = points;
         match self {
@@ -48,13 +52,20 @@ impl Points {
 
 #[derive(Debug, Clone)]
 pub struct Pointcloud {
+    /// The offset of the pointcloud. This should be handled when the user needs to see the actual
+    /// location of the point.
     pub offset: Vector3,
+    /// The scale of the pointcloud. This should be handled when the user needs to see the actual
+    /// location of the point.
     pub scale: Vector3,
+    /// The boundary of the pointcloud in real measurements
     pub bounds: Bounds,
+    /// The points.
     pub points: Points,
 }
 
 impl Pointcloud {
+    /// Read a pointcloud from a las file.
     pub fn read_from_las(path: PathBuf) -> Self {
         let mut pcloud = las::Reader::from_path(path).unwrap();
         let header = pcloud.header().clone().into_raw().unwrap();
@@ -124,10 +135,17 @@ impl Pointcloud {
         }
     }
 
+    /// Check if a pointcloud is indexed.
     pub fn indexed(&self) -> bool {
         match &self.points {
             Points::Vec(_) => false,
             Points::Indexed(_) => true,
         }
+    }
+
+    /// Returns a indexed version of the pointcloud
+    pub fn index(mut self) -> Self {
+        self.points = self.points.initialize_index();
+        self
     }
 }

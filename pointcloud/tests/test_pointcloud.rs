@@ -2,6 +2,7 @@
 mod stats {
     use pointcloud::test_utils::mock_pointcloud;
 
+    /// Check if the pointcloud is indexed
     #[test]
     fn is_indexed() {
         let mut pc = mock_pointcloud();
@@ -10,6 +11,7 @@ mod stats {
         assert!(pc.indexed())
     }
 
+    /// Get the amount of points in the pointcloud.
     #[test]
     fn point_count() {
         let pc = mock_pointcloud();
@@ -47,8 +49,7 @@ mod modify {
 
     #[test]
     fn add_point_indexed() {
-        let mut pc = mock_pointcloud();
-        pc.points = pc.points.initialize_index();
+        let mut pc = mock_pointcloud().index();
         pc.points.add_point(Point {
             pos: Vector3::new(1.0, 0.0, 0.0),
             intensity: 234,
@@ -77,8 +78,7 @@ mod modify {
 
     #[test]
     fn add_points_indexed() {
-        let mut pc = mock_pointcloud();
-        pc.points = pc.points.initialize_index();
+        let mut pc = mock_pointcloud().index();
         pc.points.add_points(vec![
             Point {
                 pos: Vector3::new(1.0, 0.0, 0.0),
@@ -117,31 +117,38 @@ mod modify {
 
 #[cfg(test)]
 mod query {
+    /// Get points within a specified distance box and find none.
     #[test]
     fn get_by_distance_miss() {
         todo!()
     }
 
+    /// Get points within a specified distance box and find some.
     #[test]
     fn get_by_distance_hit() {
         todo!()
     }
 
+    /// Get points within a specified bounding box and find none.
     #[test]
     fn get_in_bbox_miss() {
         todo!()
     }
 
+    /// Get points within a specified bounding box and find some.
     #[test]
     fn get_in_bbox_hit() {
         todo!()
     }
 
+    /// Get the point closest to a specific coordinate and miss. This occurs when the pointcloud is
+    /// empty
     #[test]
     fn get_closest_miss() {
         todo!()
     }
 
+    /// Get the point closest to a specific coordinate and find one
     #[test]
     fn get_closest_hit() {
         todo!()
