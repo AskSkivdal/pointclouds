@@ -3,6 +3,7 @@ use pointcloud::types::{Bounds, Point, Vector3};
 #[cfg(test)]
 mod point {
     use super::*;
+    /// Test creating a boundary fromm zero points.
     #[test]
     fn test_none() {
         let empty_points: Vec<Point> = Vec::new();
@@ -25,6 +26,7 @@ mod point {
         )
     }
 
+    /// Test creating a boundary from one point.
     #[test]
     fn test_one() {
         let p1 = Vector3 {
@@ -49,6 +51,7 @@ mod point {
         )
     }
 
+    /// Test creating a boundary from many points.
     #[test]
     fn test_many() {
         let points: Vec<Point> = vec![
@@ -112,6 +115,7 @@ mod point {
 #[cfg(test)]
 mod vector {
     use super::*;
+    /// Test creating a boundary from no vectors.
     #[test]
     fn test_none() {
         let empty_points: Vec<Vector3> = Vec::new();
@@ -134,6 +138,7 @@ mod vector {
         )
     }
 
+    /// Test creating a boundary from one vector.
     #[test]
     fn test_one() {
         let p1 = Vector3 {
@@ -154,6 +159,7 @@ mod vector {
         )
     }
 
+    /// Test creating a boundary from many vectors.
     #[test]
     fn test_many() {
         let points: Vec<Vector3> = vec![
