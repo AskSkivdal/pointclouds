@@ -36,7 +36,7 @@ mod point {
         };
 
         let empty_points: Vec<Point> = vec![Point {
-            pos: p1.clone(),
+            pos: p1,
             intensity: 0,
             color: None,
         }];
@@ -45,8 +45,8 @@ mod point {
         assert_eq!(
             bounds,
             Bounds {
-                max: p1.clone(),
-                min: p1.clone(),
+                max: p1,
+                min: p1,
             }
         )
     }
@@ -147,14 +147,14 @@ mod vector {
             z: 5.0,
         };
 
-        let empty_points: Vec<Vector3> = vec![p1.clone()];
+        let empty_points: Vec<Vector3> = vec![p1];
         let bounds: Bounds = (&empty_points).into();
 
         assert_eq!(
             bounds,
             Bounds {
-                max: p1.clone(),
-                min: p1.clone(),
+                max: p1,
+                min: p1,
             }
         )
     }

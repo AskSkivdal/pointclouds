@@ -81,8 +81,7 @@ impl Pointcloud {
                 },
                 intensity: x.intensity,
                 color: x
-                    .color
-                    .and_then(|color| Some(Color::new(color.red, color.green, color.blue))),
+                    .color.map(|color| Color::new(color.red, color.green, color.blue)),
             })
             .collect();
 
@@ -97,13 +96,11 @@ impl Pointcloud {
             if max == 0 && min == 0 {
             } else if max <= u8::MAX as u16 {
                 points_vector.par_iter_mut().for_each(|x| {
-                    x.color = x.color.and_then(|color| {
-                        Some(Color {
+                    x.color = x.color.map(|color| Color {
                             r: color.r.pow(2),
                             g: color.g.pow(2),
                             b: color.b.pow(2),
-                        })
-                    });
+                        });
                 });
             }
         }

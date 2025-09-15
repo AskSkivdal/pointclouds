@@ -19,9 +19,9 @@ impl Bounds {
     }
 }
 
-impl Into<Bounds> for &Vec<Point> {
-    fn into(self) -> Bounds {
-        let mut point_iterator = self.iter();
+impl From<&Vec<Point>> for Bounds {
+    fn from(val: &Vec<Point>) -> Self {
+        let mut point_iterator = val.iter();
 
         let mut bounds: Bounds = if let Some(point) = point_iterator.next() {
             Bounds {
@@ -40,9 +40,9 @@ impl Into<Bounds> for &Vec<Point> {
     }
 }
 
-impl Into<Bounds> for &Vec<Vector3> {
-    fn into(self) -> Bounds {
-        let mut point_iterator = self.iter();
+impl From<&Vec<Vector3>> for Bounds {
+    fn from(val: &Vec<Vector3>) -> Self {
+        let mut point_iterator = val.iter();
 
         let mut bounds: Bounds = if let Some(point) = point_iterator.next() {
             Bounds {
@@ -54,7 +54,7 @@ impl Into<Bounds> for &Vec<Vector3> {
         };
 
         for point in point_iterator {
-            bounds.grow_with_vector(&point);
+            bounds.grow_with_vector(point);
         }
 
         bounds

@@ -64,7 +64,7 @@ impl rstar::Point for Vector3 {
             0 => self.x,
             1 => self.y,
             2 => self.z,
-            _ => panic!("Index out of bounds for Vector3: {}", index),
+            _ => panic!("Index out of bounds for Vector3: {index}"),
         }
     }
 
@@ -73,7 +73,7 @@ impl rstar::Point for Vector3 {
             0 => &mut self.x,
             1 => &mut self.y,
             2 => &mut self.z,
-            _ => panic!("Index out of bounds for Vector3: {}", index),
+            _ => panic!("Index out of bounds for Vector3: {index}"),
         }
     }
 }
