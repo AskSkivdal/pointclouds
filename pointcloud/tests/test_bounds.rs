@@ -42,13 +42,7 @@ mod point {
         }];
         let bounds: Bounds = (&empty_points).into();
 
-        assert_eq!(
-            bounds,
-            Bounds {
-                max: p1,
-                min: p1,
-            }
-        )
+        assert_eq!(bounds, Bounds { max: p1, min: p1 })
     }
 
     /// Test creating a boundary from many points.
@@ -150,13 +144,7 @@ mod vector {
         let empty_points: Vec<Vector3> = vec![p1];
         let bounds: Bounds = (&empty_points).into();
 
-        assert_eq!(
-            bounds,
-            Bounds {
-                max: p1,
-                min: p1,
-            }
-        )
+        assert_eq!(bounds, Bounds { max: p1, min: p1 })
     }
 
     /// Test creating a boundary from many vectors.
